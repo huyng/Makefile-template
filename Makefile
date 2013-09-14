@@ -1,13 +1,13 @@
-CC = g++
-CFLAGS = -g -Wall `pkg-config --libs --cflags opencv`
-INCLUDES = -I/usr/local/include
-LFLAGS = -L/usr/local/lib
-LIBS =
-SRCS = main.cpp
-OBJS = $(SRCS:.c=.o)
+CC=g++
+CFLAGS=-g -Wall -O3
+INCLUDES=-I/usr/local/include
+LFLAGS=-L/usr/local/lib
+LIBS=`pkg-config --libs opencv`
+SRCS=main.cpp
+OBJS=$(SRCS:.cpp=.o)
 
 # define the executable file  name
-TARGET = main
+TARGET = smartcrop
 
 #
 # The following part of the makefile is generic; it can be used to 
@@ -24,7 +24,7 @@ $(TARGET): $(OBJS)
 # it uses automatic variables $<: the name of the prerequisite of
 # the rule(a .cpp file) and $@: the name of the target of the rule (a .o file) 
 # (see the gnu make manual section about automatic variables)
-.cpp.o:
+%.o: %.cpp
 	$(CC) $(CFLAGS) $(INCLUDES) -c $<  -o $@
 
 clean:
